@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>WASM Websocket Demo</title>
+    <script src="wasm_exec.js"></script>
+    <script>
+      const go = new Go();
+        let mod, inst;
+        userName = "undifined";
+        function run() {
+        WebAssembly.instantiateStreaming(fetch("client.wasm"), go.importObject).then(//( result )
+            async result => {
+            mod = result.module;
+            inst = result.instance;
+            await go.run(inst);
+        });
+        }
+        </script>
+  </head>
+  <body>
+    页面显示了
+    <button onclick="run()">run</button>
+  </body>
+</html>
